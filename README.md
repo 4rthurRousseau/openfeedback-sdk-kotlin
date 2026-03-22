@@ -1,16 +1,16 @@
-[![BuildStatus](https://github.com/paug/openfeedback-android-sdk/actions/workflows/ci.yaml/badge.svg)](https://github.com/paug/openfeedback-android-sdk/actions/workflows/ci.yaml/badge.svg)
+[![BuildStatus](https://github.com/paug/openfeedback-android-sdk/actions/workflows/ci.yaml/badge.svg)](https://github.com/paug/openfeedback-android-sdk/actions/workflows/publish-snapshot.yaml/badge.svg)
 
 # Open-Feedback Kotlin SDK
 
-A Kotlin multiplatform client for Open-Feeedback https://github.com/HugoGresse/open-feedback:
+A Kotlin multiplatform client for Open-Feedback https://github.com/HugoGresse/open-feedback:
 
 ![screenshot](docs/screenshot.png)
 
 ## Usage
 
-The Composable `OpenFeedback` is the entry point to vote on a session. It'll make calls
-between the Firebase which host your OpenFeedback instance and your mobile application. It is
-mandatory to initialize the `OpenFeedbackFirebaseConfig` class to be able to get the Firebase 
+The Composable `OpenFeedback` is the entry point to vote on a session. It makes calls
+between Firebase which hosts your OpenFeedback instance and your mobile application. It is
+mandatory to initialize the `OpenFeedbackFirebaseConfig` class to be able to get the Firebase
 instance which is common for all sessions of your event.
 
 Note that it is mandatory to keep this instance unique in your application because it creates the
@@ -34,10 +34,19 @@ OpenFeedback(
 )
 ```
 
+> **Note:** If your OpenFeedback project was created with the storage option **Base
+> de donnée OpenFeedback (par défaut)**, no additional Firebase configuration is required. Simply
+> use `OpenFeedbackFirebaseConfig.default(context)` when initializing the SDK:
+>
+> ```kotlin
+> // In your Application class
+> initializeOpenFeedback(OpenFeedbackFirebaseConfig.default(applicationContext))
+> ```
+
 That's all!
 
-See the [sample-app-android](sample-app/src/main/java/io/openfeedback/android/sample/MainActivity.kt) 
-app module if you want to see this implementation in action.
+See the [sample-app-shared](sample-app-shared/src/commonMain/kotlin/io/openfeedback/shared/main.kt) 
+library module if you want to see this implementation in action.
 
 If you are interested to create your own UI, you can use the component `OpenFeedbackLayout`. This
 `Composable` takes OpenFeedback Model UI in input and you can use `OpenFeedbackViewModel` in the
@@ -64,7 +73,7 @@ repositories {
     mavenCentral()
 }
 
-val openfeedbackVersion = "1.0.0-alpha.3"
+val openfeedbackVersion = "1.0.0-alpha.6"
 dependencies {
     // Material 3
     implementation("io.openfeedback:openfeedback-m3:$openfeedbackVersion")
