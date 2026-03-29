@@ -1,9 +1,6 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
-$dokka.location:////PointingToDeclaration/sample-app-shared/[root]/index.html
-$dokka.location://OpenFeedbackTheme/#kotlin.Boolean#kotlin.Function0[kotlin.Unit]/PointingToDeclaration/sample-app-shared/[root]/-open-feedback-theme.html
-$dokka.location://SampleApp/#kotlin.Boolean#kotlin.Any?/PointingToDeclaration/sample-app-shared/[root]/-sample-app.html
-$dokka.location://ThemeSwitcher/#kotlin.Boolean#kotlin.Function1[kotlin.Boolean,kotlin.Unit]/PointingToDeclaration/sample-app-shared/[root]/-theme-switcher.html
+
 module:openfeedback
 io.openfeedback
 io.openfeedback.model
@@ -16,7 +13,3 @@ io.openfeedback.ui.models
 module:openfeedback-viewmodel
 io.openfeedback
 io.openfeedback.viewmodels
-module:sample-app-android
-io.openfeedback.android
-module:sample-app-shared
-io.openfeedback.shared
