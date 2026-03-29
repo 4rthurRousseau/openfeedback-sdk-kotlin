@@ -1,10 +1,9 @@
-import com.gradleup.librarian.gradle.configureAndroidCompatibility
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.compose")
     id("org.jetbrains.kotlin.plugin.compose")
+    id("org.jetbrains.dokka")
 }
 
 androidApp("io.openfeedback.android")
