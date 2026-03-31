@@ -62,8 +62,10 @@ fun OpenFeedbackTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        else -> if (isLight) lightColorScheme() else darkColorScheme()
+        isLight  -> lightColorScheme()
+        else -> darkColorScheme()
     }
+
     MaterialTheme(
         colorScheme = colorScheme,
         content = content

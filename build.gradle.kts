@@ -1,5 +1,9 @@
 import com.gradleup.librarian.gradle.Librarian
 
+plugins {
+    alias(libs.plugins.androidMultiplatformLibrary) apply false
+}
+
 buildscript {
     repositories {
         mavenCentral()

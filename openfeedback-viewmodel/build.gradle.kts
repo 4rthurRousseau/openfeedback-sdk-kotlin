@@ -1,7 +1,6 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.multiplatform")
-    id("org.jetbrains.kotlin.plugin.serialization")
+    alias(libs.plugins.androidMultiplatformLibrary)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 library(
@@ -22,6 +21,11 @@ library(
 
                 api(libs.androidx.lifecycle.viewmodel.compose)
                 api(libs.vanniktech.multiplatform.locale)
+            }
+        }
+        getByName("androidMain") {
+            dependencies {
+                implementation(kotlinMultiplatformExtension.compose.preview)
             }
         }
     }

@@ -1,44 +1,65 @@
-import com.android.build.api.dsl.CommonExtension
+import com.android.build.api.dsl.ApplicationExtension
 import com.gradleup.librarian.gradle.Librarian
-import com.gradleup.librarian.gradle.configureAndroidCompatibility
 import compat.patrouille.configureJavaCompatibility
-import compat.patrouille.configureKotlinCompatibility
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget
 
-private fun Project.configureAndroid(namespace: String) {
-    configureAndroidCompatibility(23, 35, 35)
+private fun Project.configureAndroidLibrary(namespace: String) {
+    extensions.configure(KotlinMultiplatformExtension::class.java) {
+        androidLibraryV2 {
+            experimentalProperties["android.experimental.kmp.enableAndroidResources"] = true
 
-    configureJavaCompatibility(17)
-    configureKotlinCompatibility("2.0.0")
+            this.namespace = namespace
+            compileSdk = 35
+            minSdk = 23
+            configureJavaCompatibility(17)
+        }
+    }
+}
 
-    extensions.getByType(CommonExtension::class.java).apply {
+private fun Project.configureAndroidApplication(namespace: String) {
+    extensions.configure(ApplicationExtension::class.java) {
         this.namespace = namespace
+        defaultConfig {
+            targetSdk = 35
+            compileSdk = 35
+            minSdk = 23
+        }
+        configureJavaCompatibility(17)
     }
 }
 
 private fun Project.configureKotlin(composeMetrics: Boolean) {
-    tasks.withType(KotlinCompilationTask::class.java) {
-        val freeCompilerArgs = it.compilerOptions.freeCompilerArgs
-        freeCompilerArgs.add("-Xexpect-actual-classes")
-        if (composeMetrics) {
+    extensions.configure(KotlinMultiplatformExtension::class.java) {
+        val options = buildList {
+            add("-Xexpect-actual-classes")
+
+            if (!composeMetrics) {
+                return@buildList
+            }
+
             if (project.findProperty("composeCompilerReports") == "true") {
-                freeCompilerArgs.add("-P")
-                freeCompilerArgs.add("plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=${project.layout.buildDirectory.asFile.get().absolutePath}/compose_compiler")
+                add("-P")
+                add("plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=${project.layout.buildDirectory.asFile.get().absolutePath}/compose_compiler")
             }
+
             if (project.findProperty("composeCompilerMetrics") == "true") {
-                freeCompilerArgs.add("-P")
-                freeCompilerArgs.add("plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=${project.layout.buildDirectory.asFile.get().absolutePath}/compose_compiler")
+                add("-P")
+                add("plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=${project.layout.buildDirectory.asFile.get().absolutePath}/compose_compiler")
             }
+        }
+
+        compilerOptions {
+            freeCompilerArgs.addAll(options)
         }
     }
 }
 
 private fun Project.configureKMP() {
-    (extensions.getByName("kotlin") as KotlinMultiplatformExtension).apply {
+    extensions.configure(KotlinMultiplatformExtension::class.java) {
         applyDefaultHierarchyTemplate()
-        androidTarget {
+        targets.withType(KotlinAndroidTarget::class.java).configureEach {
             publishLibraryVariants("release")
         }
         iosX64()
@@ -56,7 +77,7 @@ fun Project.library(
     if (compose) {
         applyJetbrainsComposePlugin()
     }
-    configureAndroid(namespace = namespace)
+    configureAndroidLibrary(namespace = namespace)
     configureKMP()
 
     configureKotlin(compose)
@@ -69,6 +90,5 @@ fun Project.library(
 fun Project.androidApp(
     namespace: String,
 ) {
-    configureAndroid(namespace = namespace)
-    configureKotlin(composeMetrics = true)
+    configureAndroidApplication(namespace = namespace)
 }

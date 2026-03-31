@@ -1,6 +1,6 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.plugin.serialization")
+    alias(libs.plugins.androidMultiplatformLibrary)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 library(
@@ -21,6 +21,7 @@ library(
             dependencies {
                 with (kotlinMultiplatformExtension) {
                     implementation(compose.uiTooling)
+                    implementation(compose.preview)
                 }
             }
         }

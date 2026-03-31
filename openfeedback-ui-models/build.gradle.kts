@@ -1,6 +1,5 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.multiplatform")
+    alias(libs.plugins.androidMultiplatformLibrary)
 }
 
 library(

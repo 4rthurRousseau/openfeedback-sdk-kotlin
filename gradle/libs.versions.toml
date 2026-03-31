@@ -1,13 +1,14 @@
 [versions]
+agp = "9.0.1"
 androidx-activity = "1.10.1"
 androidx-appcompat = "1.7.0"
 androidx-core = "1.15.0"
-gitlive-firebase = "2.1.0"
+gitlive-firebase = "2.4.0"
 google-firebase-auth = "23.2.0"
 google-firebase-common = "21.0.0"
 google-firebase-firestore = "25.1.2"
 jetbrains-compose = "1.7.3"
-jetbrains-kotlin = "2.1.10"
+jetbrains-kotlin = "2.3.0"
 jetbrains-kotlin-coroutines = "1.10.1"
 bcv = "0.17.0"
 jetbrains-kotlinx-collections-immutable = "0.3.8"
@@ -18,7 +19,7 @@ multiplatform-locale = "0.9.0"
 touchlab-kermit = "2.0.5"
 
 [libraries]
-android-gradle-plugin = "com.android.tools.build:gradle:8.9.0"
+android-gradle-plugin = "com.android.tools.build:gradle:9.0.0"
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
@@ -34,7 +35,6 @@ google-firebase-firestore = { module = "com.google.firebase:firebase-firestore-k
 jetbrains-compose-compiler-gradle-plugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "jetbrains-kotlin" }
 jetbrains-compose-gradle-plugin = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "jetbrains-compose" }
 jetbrains-kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "jetbrains-kotlin" }
-jetbrains-kotlin-serialization-plugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "jetbrains-kotlin" }
 jetbrains-kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "jetbrains-kotlin" }
 jetbrains-kotlinx-binary-compatibility-validator = { module = "org.jetbrains.kotlinx:binary-compatibility-validator", version.ref = "bcv" }
 jetbrains-kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "jetbrains-kotlinx-collections-immutable" }
@@ -46,3 +46,7 @@ lyricist = { module = "cafe.adriel.lyricist:lyricist", version.ref = "lyricist" 
 touchlab-kermit = { module = "co.touchlab:kermit", version.ref = "touchlab-kermit" }
 vanniktech-multiplatform-locale = { module = "com.vanniktech:multiplatform-locale", version.ref = "multiplatform-locale" }
 version-catalog-update = "nl.littlerobots.version-catalog-update:nl.littlerobots.version-catalog-update.gradle.plugin:0.8.5"
+
+[plugins]
+androidMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "jetbrains-kotlin" }

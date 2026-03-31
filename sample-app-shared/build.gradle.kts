@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
-    id("com.android.library")
+    alias(libs.plugins.androidMultiplatformLibrary)
     id("org.jetbrains.dokka")
 }
 
