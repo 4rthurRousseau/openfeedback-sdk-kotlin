@@ -11,7 +11,7 @@ private fun Project.configureAndroidLibrary(namespace: String) {
             experimentalProperties["android.experimental.kmp.enableAndroidResources"] = true
 
             this.namespace = namespace
-            compileSdk = 35
+            compileSdk = 36
             minSdk = 23
             configureJavaCompatibility(17)
         }
@@ -22,8 +22,8 @@ private fun Project.configureAndroidApplication(namespace: String) {
     extensions.configure(ApplicationExtension::class.java) {
         this.namespace = namespace
         defaultConfig {
-            targetSdk = 35
-            compileSdk = 35
+            targetSdk = 36
+            compileSdk = 36
             minSdk = 23
         }
         configureJavaCompatibility(17)
