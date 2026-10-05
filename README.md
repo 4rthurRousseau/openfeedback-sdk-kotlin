@@ -1,4 +1,4 @@
-![BuildStatus](https://github.com/4rthurRousseau/openfeedback-sdk-kotlin/edit/main/README.md)
+![BuildStatus](https://github.com/4rthurRousseau/openfeedback-sdk-kotlin/actions/workflows/publish-snapshot.yaml/badge.svg)
 
 # Open-Feedback Kotlin SDK
 
