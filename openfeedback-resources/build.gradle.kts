@@ -15,8 +15,8 @@ library(
         sourceSets {
             findByName("commonMain")!!.apply {
                 dependencies {
-                    implementation(it.compose.ui)
-                    api(it.compose.components.resources)
+                    implementation(libs.compose.ui)
+                    api(libs.compose.components.resources)
 
                     api(libs.lyricist)
                 }

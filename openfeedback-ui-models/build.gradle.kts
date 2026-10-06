@@ -9,7 +9,7 @@ library(
     kotlinMultiplatformExtension.sourceSets {
         getByName("commonMain") {
             dependencies {
-                implementation(kotlinMultiplatformExtension.compose.runtime)
+                implementation(libs.compose.runtime)
                 api(libs.vanniktech.multiplatform.locale)
                 api(libs.jetbrains.kotlinx.collections.immutable)
             }

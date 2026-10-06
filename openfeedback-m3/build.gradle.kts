@@ -13,15 +13,15 @@ library(
                 api(projects.openfeedbackResources)
                 api(projects.openfeedbackUiModels)
 
-                implementation(kotlinMultiplatformExtension.compose.material3)
-                implementation(kotlinMultiplatformExtension.compose.materialIconsExtended)
+                implementation(libs.compose.material3)
+                implementation(libs.compose.material.icons.extended)
             }
         }
         val androidMain by getting {
             dependencies {
                 with (kotlinMultiplatformExtension) {
-                    implementation(compose.uiTooling)
-                    implementation(compose.preview)
+                    implementation(libs.compose.ui.tooling)
+                    implementation(libs.compose.ui.tooling.preview)
                 }
             }
         }
