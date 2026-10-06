@@ -1,6 +1,5 @@
 package io.openfeedback.viewmodels.mappers
 
-import com.vanniktech.locale.Locale
 import io.openfeedback.model.SessionData
 import io.openfeedback.ui.models.UIComment
 import io.openfeedback.ui.models.UIDot
