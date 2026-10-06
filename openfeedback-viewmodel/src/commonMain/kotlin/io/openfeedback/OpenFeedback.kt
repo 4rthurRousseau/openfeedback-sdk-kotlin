@@ -20,8 +20,6 @@ import io.openfeedback.m3.FeedbackNotReady
 import io.openfeedback.m3.Loading
 import io.openfeedback.m3.OpenFeedbackLayout
 import io.openfeedback.m3.VoteCard
-import io.openfeedback.ui.models.UIComment
-import io.openfeedback.ui.models.UIVoteItem
 import io.openfeedback.viewmodels.OpenFeedbackUiState
 import io.openfeedback.viewmodels.OpenFeedbackViewModel
 import io.openfeedback.viewmodels.getFirebaseApp
@@ -40,6 +38,7 @@ import io.openfeedback.viewmodels.getFirebaseApp
  * @param appName Locale openfeedback name, used to restore openfeedback configuration.
  * @param loading Component to display when the view model fetch vote items.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OpenFeedback(
     projectId: String,
@@ -57,7 +56,6 @@ fun OpenFeedback(
         notReady()
         return
     }
-
     // Putting the ViewModel initialization here allows us to display this component
     // in a Composable Preview with isNotReady flag set to true.
     val viewModel = viewModel<OpenFeedbackViewModel>(
@@ -69,36 +67,11 @@ fun OpenFeedback(
             languageCode = languageCode
         )
     )
-
-    val uiState by viewModel.uiState.collectAsState()
-    InternalOpenFeedback(
-        modifier = modifier,
-        uiState = uiState,
-        columnCount = columnCount,
-        displayComments = displayComments,
-        loading = loading,
-        upvoteComment = viewModel::upVote,
-        submitComment = viewModel::submitComment,
-        voteForItem = viewModel::vote,
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun InternalOpenFeedback(
-    uiState: OpenFeedbackUiState,
-    modifier: Modifier = Modifier,
-    columnCount: Int = 2,
-    displayComments: Boolean = true,
-    loading: @Composable () -> Unit = { Loading(modifier = modifier) },
-    upvoteComment: (UIComment) -> Unit = { },
-    submitComment: (String) -> Unit = { },
-    voteForItem: (UIVoteItem) -> Unit = { }
-) {
-    when (uiState) {
+    val uiState = viewModel.uiState.collectAsState()
+    when (uiState.value) {
         is OpenFeedbackUiState.Loading -> loading()
         is OpenFeedbackUiState.Success -> {
-            val session = uiState.session
+            val session = (uiState.value as OpenFeedbackUiState.Success).session
             var text by remember { mutableStateOf("") }
 
             OpenFeedbackLayout(
@@ -109,21 +82,21 @@ private fun InternalOpenFeedback(
                 comment = {
                     Comment(
                         comment = it,
-                        onClick = upvoteComment
+                        onClick = viewModel::upVote
                     )
                 },
                 commentInput = {
                     CommentInput(
                         value = text,
                         onValueChange = { text = it },
-                        onSubmit = { submitComment(text) },
+                        onSubmit = { viewModel.submitComment(text) },
                         modifier = Modifier.fillMaxWidth()
                     )
                 },
                 voteItem = {
                     VoteCard(
                         voteModel = it,
-                        onClick = voteForItem,
+                        onClick = viewModel::vote,
                         modifier = Modifier
                             .height(100.dp)
                             .fillMaxWidth()
