@@ -16,7 +16,5 @@ io.openfeedback.ui.models
 module:openfeedback-viewmodel
 io.openfeedback
 io.openfeedback.viewmodels
-module:sample-app-android
-io.openfeedback.android
 module:sample-app-shared
 io.openfeedback.shared
