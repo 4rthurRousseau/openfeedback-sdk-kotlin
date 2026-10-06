@@ -1,7 +1,7 @@
 import com.gradleup.librarian.gradle.Librarian
 
 plugins {
-    alias(libs.plugins.androidMultiplatformLibrary) apply false
+    alias(libs.plugins.android.kotlin.multiplatform.library) apply false
 }
 
 buildscript {

@@ -1,21 +1,24 @@
 import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryExtension
 import com.gradleup.librarian.gradle.Librarian
 import compat.patrouille.configureJavaCompatibility
 import org.gradle.api.Project
+import org.gradle.api.plugins.ExtensionAware
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget
 
-private fun Project.configureAndroidLibrary(namespace: String) {
+private fun Project.configureAndroidLibrary(namespace: String, enableAndroidResources: Boolean) {
     extensions.configure(KotlinMultiplatformExtension::class.java) {
-        androidLibraryV2 {
-            experimentalProperties["android.experimental.kmp.enableAndroidResources"] = true
+        val ext = (this as ExtensionAware).extensions
+            .getByName("androidLibrary") as KotlinMultiplatformAndroidLibraryExtension
 
-            this.namespace = namespace
-            compileSdk = 36
-            minSdk = 23
-            configureJavaCompatibility(17)
-        }
+        ext.namespace = namespace
+        ext.compileSdk = 36
+        ext.minSdk = 23
+        ext.androidResources.enable = enableAndroidResources
     }
+
+    configureJavaCompatibility(17)
 }
 
 private fun Project.configureAndroidApplication(namespace: String) {
@@ -26,8 +29,9 @@ private fun Project.configureAndroidApplication(namespace: String) {
             compileSdk = 36
             minSdk = 23
         }
-        configureJavaCompatibility(17)
     }
+
+    configureJavaCompatibility(17)
 }
 
 private fun Project.configureKotlin(composeMetrics: Boolean) {
@@ -71,13 +75,14 @@ private fun Project.configureKMP() {
 fun Project.library(
     namespace: String,
     compose: Boolean = false,
+    enableAndroidResources: Boolean = false,
     kotlin: (KotlinMultiplatformExtension) -> Unit
 ) {
     val kotlinMultiplatformExtension = applyKotlinMultiplatformPlugin()
     if (compose) {
         applyJetbrainsComposePlugin()
     }
-    configureAndroidLibrary(namespace = namespace)
+    configureAndroidLibrary(namespace = namespace, enableAndroidResources = enableAndroidResources)
     configureKMP()
 
     configureKotlin(compose)

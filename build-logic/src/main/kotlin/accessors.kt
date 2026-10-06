@@ -1,5 +1,3 @@
-import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
-import org.gradle.kotlin.dsl.configure
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
 import org.jetbrains.compose.ComposePlugin
@@ -17,9 +15,3 @@ val KotlinMultiplatformExtension.compose: ComposePlugin.Dependencies
     get() {
         return (this as ExtensionAware).extensions.getByName("compose") as ComposePlugin.Dependencies
     }
-
-fun KotlinMultiplatformExtension.androidLibraryV2(
-    block: KotlinMultiplatformAndroidLibraryTarget.() -> Unit
-) {
-    configure<KotlinMultiplatformAndroidLibraryTarget>(block)
-}

@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.androidMultiplatformLibrary)
+    alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.kotlin.serialization)
 
     id("org.jetbrains.compose")
@@ -9,6 +9,7 @@ plugins {
 library(
     namespace = "io.openfeedback.resources",
     compose = true,
+    enableAndroidResources = true,
 ) {
     with(it) {
         sourceSets {
@@ -19,14 +20,6 @@ library(
 
                     api(libs.lyricist)
                 }
-            }
-        }
-
-        androidLibraryV2 {
-            experimentalProperties["android.experimental.kmp.enableAndroidResources"] = true
-
-            androidResources {
-                enable = true
             }
         }
     }

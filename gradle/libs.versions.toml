@@ -1,5 +1,5 @@
 [versions]
-agp = "9.0.1"
+agp = "9.1.0"
 androidx-activity = "1.10.1"
 androidx-appcompat = "1.7.0"
 androidx-core = "1.15.0"
@@ -19,7 +19,7 @@ multiplatform-locale = "0.9.0"
 touchlab-kermit = "2.0.5"
 
 [libraries]
-android-gradle-plugin = "com.android.tools.build:gradle:9.0.0"
+android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
@@ -48,5 +48,5 @@ vanniktech-multiplatform-locale = { module = "com.vanniktech:multiplatform-local
 version-catalog-update = "nl.littlerobots.version-catalog-update:nl.littlerobots.version-catalog-update.gradle.plugin:0.8.5"
 
 [plugins]
-androidMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
+android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "jetbrains-kotlin" }
