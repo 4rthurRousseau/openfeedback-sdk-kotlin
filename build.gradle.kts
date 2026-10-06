@@ -9,6 +9,9 @@ buildscript {
         mavenCentral()
         google()
         gradlePluginPortal()
+        maven("https://storage.googleapis.com/gradleup/m2") {
+            content { includeGroupByRegex("com\\.gradleup\\..*") }
+        }
     }
     dependencies {
         //noinspection UseTomlInstead

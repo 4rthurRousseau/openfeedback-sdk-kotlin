@@ -6,6 +6,9 @@ pluginManagement {
             mavenCentral()
             google()
             gradlePluginPortal()
+            maven("https://storage.googleapis.com/gradleup/m2") {
+                content { includeGroupByRegex("com\\.gradleup\\..*") }
+            }
         }
     }
 }

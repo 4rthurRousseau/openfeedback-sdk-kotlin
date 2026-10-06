@@ -1,11 +1,11 @@
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryExtension
 import com.gradleup.librarian.gradle.Librarian
-import compat.patrouille.configureJavaCompatibility
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget
+import tapmoc.configureJavaCompatibility
 
 private fun Project.configureAndroidLibrary(namespace: String, enableAndroidResources: Boolean) {
     extensions.configure(KotlinMultiplatformExtension::class.java) {
