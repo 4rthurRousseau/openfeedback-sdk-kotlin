@@ -7,7 +7,7 @@ library(
     namespace = "io.openfeedback",
 ) {
     it.sourceSets {
-        getByName("commonMain").apply {
+        getByName("commonMain") {
             dependencies {
                 api(libs.jetbrains.kotlinx.coroutines)
                 api(libs.jetbrains.kotlinx.datetime)
@@ -21,7 +21,7 @@ library(
                 implementation(libs.touchlab.kermit)
             }
         }
-        getByName("androidMain"){
+        getByName("androidMain") {
             dependencies {
                 api(libs.google.firebase.common)
                 api(libs.google.firebase.firestore)

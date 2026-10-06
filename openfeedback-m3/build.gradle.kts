@@ -8,7 +8,7 @@ library(
     compose = true,
 ) { kotlinMultiplatformExtension ->
     kotlinMultiplatformExtension.sourceSets {
-        findByName("commonMain")!!.apply {
+        getByName("commonMain") {
             dependencies {
                 api(projects.openfeedbackResources)
                 api(projects.openfeedbackUiModels)
@@ -17,7 +17,8 @@ library(
                 implementation(libs.compose.material.icons.extended)
             }
         }
-        val androidMain by getting {
+
+        getByName("androidMain") {
             dependencies {
                 with (kotlinMultiplatformExtension) {
                     implementation(libs.compose.ui.tooling)
