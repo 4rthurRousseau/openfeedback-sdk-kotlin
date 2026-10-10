@@ -1,24 +1,21 @@
 import com.android.build.api.dsl.ApplicationExtension
-import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryExtension
+import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
 import com.gradleup.librarian.gradle.Librarian
 import org.gradle.api.Project
-import org.gradle.api.plugins.ExtensionAware
 import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 import tapmoc.configureJavaCompatibility
 import tapmoc.configureKotlinCompatibility
 
 private fun Project.configureAndroidLibrary(namespace: String, enableAndroidResources: Boolean) {
     extensions.configure<KotlinMultiplatformExtension> {
-        val ext = (this as ExtensionAware).extensions
-            .getByName("androidLibrary") as KotlinMultiplatformAndroidLibraryExtension
-
-        ext.namespace = namespace
-        ext.compileSdk = 36
-        ext.minSdk = 23
-        ext.androidResources.enable = enableAndroidResources
+        targets.withType(KotlinMultiplatformAndroidLibraryTarget::class.java).configureEach {
+            this.namespace = namespace
+            compileSdk = 35
+            minSdk = 23
+            androidResources.enable = enableAndroidResources
+        }
     }
 }
 
@@ -26,13 +23,11 @@ private fun Project.configureAndroidApplication(namespace: String) {
     extensions.configure(ApplicationExtension::class.java) {
         this.namespace = namespace
         defaultConfig {
-            targetSdk = 36
-            compileSdk = 36
+            targetSdk = 35
+            compileSdk = 35
             minSdk = 23
         }
     }
-
-
 }
 
 private fun Project.configureKotlin(composeMetrics: Boolean) {
@@ -55,9 +50,6 @@ private fun Project.configureKotlin(composeMetrics: Boolean) {
 private fun Project.configureKMP() {
     extensions.configure<KotlinMultiplatformExtension> {
         applyDefaultHierarchyTemplate()
-        targets.withType(KotlinAndroidTarget::class.java).configureEach {
-            publishLibraryVariants("release")
-        }
         iosX64()
         iosArm64()
         iosSimulatorArm64()
