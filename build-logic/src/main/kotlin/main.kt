@@ -32,6 +32,8 @@ private fun Project.configureAndroidApplication(namespace: String) {
 
 private fun Project.configureKotlin(composeMetrics: Boolean) {
     tasks.withType(KotlinCompilationTask::class.java) {
+        compilerOptions.optIn.add("kotlin.time.ExperimentalTime")
+
         val freeCompilerArgs = compilerOptions.freeCompilerArgs
         freeCompilerArgs.add("-Xexpect-actual-classes")
         if (composeMetrics) {
