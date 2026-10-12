@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.openfeedback.resources.LocalStrings
 import io.openfeedback.resources.Res
@@ -45,4 +46,10 @@ internal fun PoweredBy(
             modifier = Modifier.height(style.fontSize.value.dp + 13.dp)
         )
     }
+}
+
+@Composable
+@Preview
+internal fun PoweredByPreview() {
+    PoweredBy()
 }

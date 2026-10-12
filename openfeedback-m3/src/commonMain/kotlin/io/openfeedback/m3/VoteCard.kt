@@ -13,8 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.openfeedback.ui.models.UIVoteItem
+import kotlinx.collections.immutable.persistentListOf
 
 @ExperimentalMaterial3Api
 @Composable
@@ -46,4 +48,19 @@ fun VoteCard(
             )
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+@Preview
+internal fun VoteCardPreview() {
+    VoteCard(
+        voteModel = UIVoteItem(
+            id = "",
+            text = "Very interesting",
+            dots = persistentListOf(),
+            votedByUser = true,
+        ),
+        onClick = { }
+    )
 }

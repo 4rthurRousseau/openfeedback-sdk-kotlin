@@ -11,6 +11,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.tooling.preview.Preview
 import io.openfeedback.resources.LocalStrings
 
 @Composable
@@ -38,5 +39,15 @@ fun CommentInput(
         keyboardActions = KeyboardActions(onDone = { onSubmit() }),
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
         maxLines = 5
+    )
+}
+
+@Composable
+@Preview
+internal fun CommentInputPreview() {
+    CommentInput(
+        value = "Comment",
+        onValueChange = { },
+        onSubmit = { },
     )
 }
