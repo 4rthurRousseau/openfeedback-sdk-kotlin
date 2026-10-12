@@ -11,7 +11,7 @@ google-firebase-auth = "23.2.0"
 google-firebase-common = "21.0.0"
 google-firebase-firestore = "25.1.2"
 jetbrains-compose = "1.10.0"
-jetbrains-kotlin = "2.3.0"
+jetbrains-kotlin = "2.4.21"
 jetbrains-kotlin-coroutines = "1.10.1"
 jetbrains-kotlinx-collections-immutable = "0.3.8"
 jetbrains-kotlinx-datetime = "0.7.1-0.6.x-compat"
@@ -53,7 +53,7 @@ jetbrains-kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotl
 jetbrains-kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "jetbrains-kotlin-coroutines" }
 jetbrains-kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "jetbrains-kotlinx-datetime" }
 jetbrains-kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "jetbrains-kotlinx-serialization" }
-librarian = "com.gradleup.librarian:librarian-gradle-plugin:0.2.2-SNAPSHOT-4d88675e4846e5141d9a2cbaa0dc5ec292315dce"
+librarian = "com.gradleup.librarian:librarian-gradle-plugin:0.2.2-SNAPSHOT-0c82d08cecd66f14f7c8914644add0b7b5b53204"
 tapmoc = { module =  "com.gradleup.tapmoc:com.gradleup.tapmoc.gradle.plugin", version.ref = "tapmoc" }
 lyricist = { module = "cafe.adriel.lyricist:lyricist", version.ref = "lyricist" }
 touchlab-kermit = { module = "co.touchlab:kermit", version.ref = "touchlab-kermit" }
