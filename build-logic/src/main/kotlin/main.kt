@@ -4,7 +4,10 @@ import com.gradleup.librarian.gradle.Librarian
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.plugin.mpp.NativeOutputKind
+import org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeTest
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink
 import tapmoc.configureJavaCompatibility
 import tapmoc.configureKotlinCompatibility
 
@@ -15,6 +18,9 @@ private fun Project.configureAndroidLibrary(namespace: String, enableAndroidReso
             compileSdk = 35
             minSdk = 23
             androidResources.enable = enableAndroidResources
+            withHostTest {
+                isIncludeAndroidResources = enableAndroidResources
+            }
         }
     }
 }
@@ -72,6 +78,18 @@ fun Project.library(
     configureKotlin(composeMetrics = compose)
 
     kotlin(kotlinMultiplatformExtension)
+
+    // Native test binaries can't be linked : the Firebase iOS frameworks are provided by Xcode.
+    // ("ld: framework 'FirebaseCore' not found"). Common tests still run on the Android host,
+    // which is enough as long as none of them relies on iOS specific code.
+    tasks.withType(KotlinNativeTest::class.java).configureEach {
+        enabled = false
+    }
+    tasks.withType(KotlinNativeLink::class.java).configureEach {
+        if (binary.outputKind == NativeOutputKind.TEST) {
+            enabled = false
+        }
+    }
 
     Librarian.module(project)
 }
