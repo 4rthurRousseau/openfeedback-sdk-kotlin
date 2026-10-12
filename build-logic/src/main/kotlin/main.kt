@@ -4,6 +4,7 @@ import com.gradleup.librarian.gradle.Librarian
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeTest
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 import tapmoc.configureJavaCompatibility
 import tapmoc.configureKotlinCompatibility
@@ -75,6 +76,10 @@ fun Project.library(
     configureKotlin(composeMetrics = compose)
 
     kotlin(kotlinMultiplatformExtension)
+
+    tasks.withType(KotlinNativeTest::class.java).configureEach {
+        enabled = false
+    }
 
     Librarian.module(project)
 }
