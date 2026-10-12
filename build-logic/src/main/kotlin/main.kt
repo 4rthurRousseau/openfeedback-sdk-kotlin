@@ -15,6 +15,9 @@ private fun Project.configureAndroidLibrary(namespace: String, enableAndroidReso
             compileSdk = 35
             minSdk = 23
             androidResources.enable = enableAndroidResources
+            withHostTest {
+                isIncludeAndroidResources = enableAndroidResources
+            }
         }
     }
 }

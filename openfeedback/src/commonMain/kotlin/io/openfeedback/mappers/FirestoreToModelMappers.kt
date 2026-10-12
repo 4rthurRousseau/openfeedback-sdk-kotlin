@@ -37,14 +37,9 @@ internal fun mapToSessionData(
             // This is a comment
             return@mapNotNull null
         }
-        /**
-         * Do we need to check voteItemId?
-         */
-//        if (it.voteItemId != project.commentVoteItemId()) {
-//            return@mapNotNull null
-//        }
-        // If it.id is not null, it's the upvote for a comment
-        it.id
+
+        // If it.voteId is not null, it's the upvote for a comment
+        it.voteId
     }.toSet()
 
     val voteItemAggregates = project.voteItems.mapNotNull { voteItem ->
@@ -76,8 +71,11 @@ internal fun mapToSessionData(
         val keys = sessionThings.filter { it.value is CommentsMap }.keys
         println("Several comment maps for voteItemIds = '$keys'.")
     }
-    val commentMap =
-        (commentsMaps.firstOrNull() ?: CommentsMap(emptyMap())).coerceAggregations(votedCommentIds)
+
+    val commentMap = sessionThings[project.commentVoteItemId()] as? CommentsMap
+        ?: commentsMaps.firstOrNull()
+        ?: CommentsMap(emptyMap())
+            .coerceAggregations(votedCommentIds)
 
     val comments = commentMap.all.values.sortedByDescending { it.updatedAt }
     return SessionData(
